@@ -20,4 +20,4 @@ http://127.0.0.1:5180/
 
 ## Publicacion
 
-Este repositorio puede publicarse como sitio estatico en GitHub Pages, Netlify, Vercel o el hosting del dominio principal.
+Este repositorio puede publicarse como sitio estatico en GitHub Pages, Netlify, Vercel o el hosting del dominio principal. GitHub Pages esta configurado para desplegar desde GitHub Actions.
