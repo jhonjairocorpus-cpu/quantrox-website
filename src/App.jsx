@@ -1,4 +1,4 @@
-﻿import React from 'react';
+﻿import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
   ArrowRight,
@@ -114,6 +114,29 @@ const faqs = [
   ['¿También desarrollan sistemas completos?', 'Sí. Podemos construir desde una landing hasta software con base de datos, paneles, roles e integraciones.'],
 ];
 
+const botAnswers = {
+  servicios: {
+    text: 'Creamos páginas web, tiendas online, software a medida, automatizaciones con IA, portales y sistemas empresariales.',
+    target: '#servicios',
+  },
+  suite: {
+    text: 'La Suite Empresarial integra facturación, POS, inventario, contabilidad, nómina, clientes, reportes y Supabase cloud.',
+    target: '#suite',
+  },
+  inventario: {
+    text: 'La app de inventario controla piezas, stock bajo, movimientos, reportes y puede conectarse con facturación.',
+    target: '#inventario',
+  },
+  planes: {
+    text: 'Tenemos planes Start, Growth, Scale y Custom. Si el proyecto requiere algo especial, lo cotizamos a medida.',
+    target: '#planes',
+  },
+  contacto: {
+    text: 'Puedes escribirnos por WhatsApp para cotizar, pedir una demo o revisar una idea de software.',
+    target: '#contacto',
+  },
+};
+
 function SectionTitle({ eyebrow, title, text }) {
   return (
     <motion.div {...reveal} className="section-title">
@@ -125,6 +148,36 @@ function SectionTitle({ eyebrow, title, text }) {
 }
 
 function App() {
+  const [botOpen, setBotOpen] = useState(false);
+  const [botMessages, setBotMessages] = useState([
+    {
+      type: 'bot',
+      text: 'Hola, soy el asistente rápido de Quantrox. Te ayudo con servicios, precios, suite empresarial, inventario y soporte.',
+    },
+  ]);
+
+  const answerBot = (key, rawQuestion = '') => {
+    const normalized = key || rawQuestion.toLowerCase();
+    const match =
+      botAnswers[normalized] ||
+      Object.entries(botAnswers).find(([answerKey]) => normalized.includes(answerKey))?.[1] ||
+      botAnswers.contacto;
+    const label = rawQuestion || Object.keys(botAnswers).find((answerKey) => botAnswers[answerKey] === match) || 'Consulta';
+    setBotMessages((messages) => [...messages, { type: 'user', text: label }, { type: 'bot', text: match.text }]);
+    if (match.target) {
+      document.querySelector(match.target)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  const handleBotSubmit = (event) => {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const question = String(form.get('question') || '').trim();
+    if (!question) return;
+    answerBot('', question);
+    event.currentTarget.reset();
+  };
+
   return (
     <>
       <nav className="nav">
@@ -287,7 +340,7 @@ function App() {
               </motion.article>
             ))}
           </div>
-          <motion.div {...reveal} className="business-systems">
+          <motion.div {...reveal} id="suite" className="business-systems">
             <div>
               <p className="eyebrow">Más soluciones</p>
               <h3>Sistemas empresariales para administrar mejor tu negocio.</h3>
@@ -421,6 +474,44 @@ function App() {
         <p>Desarrollo web | Diseño web | Software a medida | Automatización empresarial</p>
         <p>Código que crea. Diseño que impacta. Tecnología que transforma.</p>
       </footer>
+
+      <section className={`quick-bot ${botOpen ? 'open' : ''}`} aria-label="Bot de respuestas rápidas">
+        <button className="bot-float" type="button" onClick={() => setBotOpen((open) => !open)} aria-label="Abrir bot de respuestas rápidas">
+          <Bot size={26} strokeWidth={2.5} />
+        </button>
+        <div className="bot-panel" aria-live="polite">
+          <header className="bot-header">
+            <div>
+              <span>RESPUESTAS RÁPIDAS</span>
+              <h3>Bot Quantrox</h3>
+            </div>
+            <button type="button" onClick={() => setBotOpen(false)} aria-label="Cerrar bot">
+              ×
+            </button>
+          </header>
+          <div className="bot-messages">
+            {botMessages.map((message, index) => (
+              <p className={`bot-message ${message.type}`} key={`${message.type}-${index}`}>
+                {message.text}
+              </p>
+            ))}
+          </div>
+          <div className="bot-options">
+            {Object.keys(botAnswers).map((key) => (
+              <button type="button" key={key} onClick={() => answerBot(key)}>
+                {key === 'suite' ? 'Suite empresarial' : key.charAt(0).toUpperCase() + key.slice(1)}
+              </button>
+            ))}
+          </div>
+          <form className="bot-form" onSubmit={handleBotSubmit}>
+            <input name="question" type="text" placeholder="Pregunta rápida..." autoComplete="off" />
+            <button type="submit">Enviar</button>
+          </form>
+          <a className="bot-whatsapp" href="https://wa.me/573218247072?text=Hola%20Quantrox%20Systems,%20necesito%20ayuda%20con%20un%20proyecto%20digital" target="_blank" rel="noopener">
+            Hablar por WhatsApp
+          </a>
+        </div>
+      </section>
 
       <a
         className="whatsapp-float"

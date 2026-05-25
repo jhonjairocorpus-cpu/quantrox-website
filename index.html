@@ -182,7 +182,7 @@
           <article class="reveal"><h3>Busquedas rapidas</h3><p>Encuentra piezas por nombre, codigo, categoria, ubicacion o proveedor.</p></article>
           <article class="reveal"><h3>Reportes claros</h3><p>Visualiza inventario, rotacion, costos, existencias y actividad del negocio.</p></article>
         </div>
-        <div class="business-systems reveal">
+        <div id="suite" class="business-systems reveal">
           <div>
             <p class="eyebrow">Mas soluciones</p>
             <h3>Sistemas empresariales para administrar mejor tu negocio.</h3>
@@ -275,6 +275,36 @@
       <p>Codigo que crea. Diseno que impacta. Tecnologia que transforma.</p>
     </footer>
 
+    <section class="quick-bot" aria-label="Bot de respuestas rapidas">
+      <button class="bot-float" type="button" data-bot-toggle aria-label="Abrir bot de respuestas rapidas">
+        <span>AI</span>
+      </button>
+      <div class="bot-panel" aria-live="polite">
+        <header class="bot-header">
+          <div>
+            <span>RESPUESTAS RAPIDAS</span>
+            <h3>Bot Quantrox</h3>
+          </div>
+          <button type="button" data-bot-toggle aria-label="Cerrar bot">×</button>
+        </header>
+        <div class="bot-messages" data-bot-messages>
+          <p class="bot-message bot">Hola, soy el asistente rapido de Quantrox. Te ayudo con servicios, precios, suite empresarial, inventario y soporte.</p>
+        </div>
+        <div class="bot-options" data-bot-options>
+          <button type="button" data-bot-answer="servicios">Servicios</button>
+          <button type="button" data-bot-answer="suite">Suite empresarial</button>
+          <button type="button" data-bot-answer="inventario">Inventario</button>
+          <button type="button" data-bot-answer="planes">Planes</button>
+          <button type="button" data-bot-answer="contacto">Contacto</button>
+        </div>
+        <form class="bot-form" data-bot-form>
+          <input name="question" type="text" placeholder="Pregunta rapida..." autocomplete="off" />
+          <button type="submit">Enviar</button>
+        </form>
+        <a class="bot-whatsapp" href="https://wa.me/573218247072?text=Hola%20Quantrox%20Systems,%20necesito%20ayuda%20con%20un%20proyecto%20digital" target="_blank" rel="noopener">Hablar por WhatsApp</a>
+      </div>
+    </section>
+
     <a
       class="whatsapp-float"
       href="https://wa.me/573218247072?text=Hola%20Quantrox%20Systems,%20quiero%20cotizar%20un%20proyecto%20digital"
@@ -300,6 +330,70 @@
         { threshold: 0.14 }
       );
       document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+
+      const botAnswers = {
+        servicios: {
+          text: 'Creamos paginas web, tiendas online, software a medida, automatizaciones con IA, portales y sistemas empresariales.',
+          target: '#servicios',
+        },
+        suite: {
+          text: 'La Suite Empresarial integra facturacion, POS, inventario, contabilidad, nomina, clientes, reportes y Supabase cloud.',
+          target: '#suite',
+        },
+        inventario: {
+          text: 'La app de inventario controla piezas, stock bajo, movimientos, reportes y puede conectarse con facturacion.',
+          target: '#inventario',
+        },
+        planes: {
+          text: 'Tenemos planes Start, Growth, Scale y Custom. Si el proyecto requiere algo especial, lo cotizamos a medida.',
+          target: '#planes',
+        },
+        contacto: {
+          text: 'Puedes escribirnos por WhatsApp para cotizar, pedir una demo o revisar una idea de software.',
+          target: '#contacto',
+        },
+      };
+
+      const quickBot = document.querySelector('.quick-bot');
+      const botMessages = document.querySelector('[data-bot-messages]');
+
+      function addBotMessage(text, type = 'bot') {
+        const message = document.createElement('p');
+        message.className = `bot-message ${type}`;
+        message.textContent = text;
+        botMessages.appendChild(message);
+        botMessages.scrollTop = botMessages.scrollHeight;
+      }
+
+      function answerBot(key, rawQuestion = '') {
+        const normalized = key || rawQuestion.toLowerCase();
+        const match =
+          botAnswers[normalized] ||
+          Object.entries(botAnswers).find(([answerKey]) => normalized.includes(answerKey))?.[1] ||
+          botAnswers.contacto;
+        addBotMessage(rawQuestion || Object.keys(botAnswers).find((answerKey) => botAnswers[answerKey] === match) || 'Consulta', 'user');
+        addBotMessage(match.text, 'bot');
+        if (match.target) {
+          document.querySelector(match.target)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+
+      document.querySelectorAll('[data-bot-toggle]').forEach((button) => {
+        button.addEventListener('click', () => quickBot.classList.toggle('open'));
+      });
+
+      document.querySelectorAll('[data-bot-answer]').forEach((button) => {
+        button.addEventListener('click', () => answerBot(button.dataset.botAnswer));
+      });
+
+      document.querySelector('[data-bot-form]').addEventListener('submit', (event) => {
+        event.preventDefault();
+        const form = new FormData(event.currentTarget);
+        const question = String(form.get('question') || '').trim();
+        if (!question) return;
+        answerBot('', question);
+        event.currentTarget.reset();
+      });
     </script>
   </body>
 </html>
