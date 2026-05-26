@@ -343,9 +343,9 @@ function App() {
           <motion.div {...reveal} id="suite" className="business-systems">
             <div>
               <p className="eyebrow">Más soluciones</p>
-              <h3>Sistemas empresariales para administrar mejor tu negocio.</h3>
+              <h3>Suite empresarial lista para vender, controlar inventario y leer la contabilidad.</h3>
             <p>
-                Además del inventario de piezas, ya tenemos una suite instalable con módulos contables, POS con facturación y nómina para que tus clientes puedan probarla desde Android, Apple y Windows.
+                Una app instalable para oficina, celular y web. Conecta facturación, inventario, contabilidad, clientes, usuarios e historial de cambios por empresa.
               </p>
             </div>
             <div className="business-system-buttons">
@@ -361,6 +361,64 @@ function App() {
               <a href="https://wa.me/573218247072?text=Hola%20Quantrox%20Systems,%20quiero%20informacion%20sobre%20un%20sistema%20de%20nomina">
                 Sistema de Nómina
               </a>
+            </div>
+          </motion.div>
+          <motion.div {...reveal} className="suite-commerce">
+            <div className="suite-commerce-head">
+              <p className="eyebrow">Planes de la Suite</p>
+              <h3>Elige el módulo que necesita tu negocio y nosotros creamos la cuenta.</h3>
+              <p>Los clientes compran, reciben usuario, instalan la app y trabajan con datos sincronizados en Supabase.</p>
+            </div>
+            <div className="suite-tabs" aria-label="Módulos de la suite">
+              <span>Facturación + Inventario</span>
+              <span>POS</span>
+              <span>Contabilidad</span>
+              <span>Nómina</span>
+              <span>Suite completa</span>
+            </div>
+            <div className="suite-steps">
+              <span><b>1</b>Elige un plan</span>
+              <i />
+              <span><b>2</b>Creamos tu cuenta</span>
+              <i />
+              <span><b>3</b>Instalas la app</span>
+            </div>
+            <div className="suite-plan-grid">
+              <article>
+                <h4>Inicial</h4>
+                <p>Para empezar organizado</p>
+                <strong>$ 0</strong>
+                <small>activación base</small>
+                <ul><li>Inventario base</li><li>Clientes</li><li>Contabilidad inicial</li></ul>
+                <a href="https://wa.me/573218247072?text=Hola%20Quantrox%20Systems,%20quiero%20activar%20el%20plan%20Inicial%20de%20la%20Suite">Solicitar activación</a>
+              </article>
+              <article className="featured">
+                <em>Recomendado</em>
+                <h4>Empresarial</h4>
+                <p>Operación diaria conectada</p>
+                <strong>$ 79.900</strong>
+                <small>mensual desde</small>
+                <ul><li>Facturación conectada a stock</li><li>Comparativos contables</li><li>Usuarios y bitácora</li></ul>
+                <a href="https://wa.me/573218247072?text=Hola%20Quantrox%20Systems,%20quiero%20comprar%20el%20plan%20Empresarial%20de%20la%20Suite">Comprar plan</a>
+              </article>
+              <article>
+                <h4>A medida</h4>
+                <p>Para procesos propios</p>
+                <strong>Cotizar</strong>
+                <small>según alcance</small>
+                <ul><li>Automatizaciones</li><li>WhatsApp y pagos</li><li>Portal de clientes</li></ul>
+                <a href="https://wa.me/573218247072?text=Hola%20Quantrox%20Systems,%20quiero%20cotizar%20una%20Suite%20a%20medida">Hablar con asesor</a>
+              </article>
+            </div>
+            <div className="suite-feature-grid">
+              <span><b>F</b>Factura y descuenta inventario</span>
+              <span><b>I</b>Stock, alertas y movimientos</span>
+              <span><b>C</b>Ventas vs gastos por meses</span>
+              <span><b>U</b>Usuarios con historial</span>
+            </div>
+            <div className="suite-commerce-actions">
+              <a className="button primary" href={`${suiteAppUrl}?v=25`} target="_blank" rel="noopener">Ver planes en la app</a>
+              <a className="button secondary" href="https://wa.me/573218247072?text=Hola%20Quantrox%20Systems,%20quiero%20una%20cuenta%20para%20la%20Suite%20Empresarial">Crear cuenta para mi empresa</a>
             </div>
           </motion.div>
         </section>

@@ -781,6 +781,210 @@ h3 {
   border-color: rgba(98, 240, 182, 0.78);
 }
 
+.suite-commerce {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 22px;
+  margin-top: 10px;
+  padding: clamp(24px, 4vw, 40px);
+  border: 1px solid rgba(98, 240, 182, 0.2);
+  border-radius: 8px;
+  background:
+    linear-gradient(145deg, rgba(98, 240, 182, 0.1), rgba(72, 217, 255, 0.045)),
+    rgba(255, 255, 255, 0.035);
+}
+
+.suite-commerce-head {
+  display: grid;
+  max-width: 920px;
+  gap: 10px;
+}
+
+.suite-commerce-head h3 {
+  font-size: clamp(1.9rem, 3.2vw, 3.35rem);
+  line-height: 1;
+}
+
+.suite-commerce-head p:not(.eyebrow) {
+  max-width: 760px;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.suite-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.suite-tabs span {
+  min-height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  padding: 10px 13px;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.055);
+  font-weight: 900;
+}
+
+.suite-tabs span:first-child {
+  color: #07111f;
+  border-color: transparent;
+  background: var(--mint);
+}
+
+.suite-steps {
+  display: grid;
+  grid-template-columns: auto minmax(60px, 1fr) auto minmax(60px, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.suite-steps span {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-weight: 900;
+  text-align: center;
+}
+
+.suite-steps b {
+  display: inline-flex;
+  width: 34px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: #07111f;
+  background: var(--mint);
+}
+
+.suite-steps i {
+  height: 2px;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.suite-plan-grid,
+.suite-feature-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.suite-plan-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.suite-plan-grid article {
+  position: relative;
+  display: grid;
+  gap: 12px;
+  min-height: 390px;
+  align-content: start;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  padding: 24px;
+  background: rgba(7, 9, 13, 0.34);
+}
+
+.suite-plan-grid article.featured {
+  border-color: rgba(98, 240, 182, 0.48);
+  background:
+    linear-gradient(155deg, rgba(98, 240, 182, 0.13), rgba(72, 217, 255, 0.055)),
+    rgba(7, 9, 13, 0.42);
+  box-shadow: 0 24px 70px rgba(98, 240, 182, 0.12);
+}
+
+.suite-plan-grid em {
+  width: fit-content;
+  border-radius: 999px;
+  padding: 6px 10px;
+  color: #07111f;
+  background: var(--mint);
+  font-size: 0.72rem;
+  font-style: normal;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.suite-plan-grid h4 {
+  font-size: 1.45rem;
+}
+
+.suite-plan-grid p,
+.suite-plan-grid small,
+.suite-plan-grid li {
+  color: var(--muted);
+}
+
+.suite-plan-grid strong {
+  display: block;
+  font-size: clamp(2.1rem, 4vw, 3.2rem);
+  line-height: 1;
+}
+
+.suite-plan-grid ul {
+  display: grid;
+  gap: 9px;
+  margin: 8px 0;
+  padding-left: 18px;
+}
+
+.suite-plan-grid a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  align-self: end;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: var(--text);
+  font-weight: 950;
+}
+
+.suite-plan-grid .featured a {
+  color: #07111f;
+  border-color: transparent;
+  background: var(--mint);
+}
+
+.suite-feature-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.suite-feature-grid span {
+  display: flex;
+  min-height: 70px;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 14px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.suite-feature-grid b {
+  display: inline-flex;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  color: #07111f;
+  background: var(--mint);
+}
+
+.suite-commerce-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
 .plan-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
@@ -1210,6 +1414,8 @@ h3 {
   .inventory-section,
   .inventory-features,
   .business-systems,
+  .suite-plan-grid,
+  .suite-feature-grid,
   .video-grid,
   .plan-grid,
   .portfolio-grid,
@@ -1243,6 +1449,18 @@ h3 {
 
   .button {
     width: 100%;
+  }
+
+  .suite-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .suite-steps i {
+    display: none;
+  }
+
+  .suite-commerce-actions {
+    flex-direction: column;
   }
 
   .business-system-buttons a {
